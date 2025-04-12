@@ -1,11 +1,33 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Mi Página de Prueba</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DEVELOPS.ORG - Test Fase 1</title>
+  <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
-  <h1>¡Hola, mundo!</h1>
-  <p>Esta es mi primera página web guardada como HTML.</p>
+  <div class="container">
+    <h1>Test Interactivo - Fase 1</h1>
+    <form id="testForm">
+      <div class="question">
+        <label>1. ¿Te sientes motivado con el proyecto?</label>
+        <input type="radio" name="q1" value="Sí" required /> Sí
+        <input type="radio" name="q1" value="No" /> No
+      </div>
+      <div class="question">
+        <label>2. ¿Confías en el equipo de trabajo?</label>
+        <input type="radio" name="q2" value="Sí" required /> Sí
+        <input type="radio" name="q2" value="No" /> No
+      </div>
+      <input type="email" id="emailInput" placeholder="Tu correo aquí" required />
+      <button type="submit">Ver resultados en PDF</button>
+    </form>
+    <div id="resultContainer"></div>
+  </div>
+  <script src="js/test.js"></script>
+  <script src="js/pdf.js"></script>
+  <script src="js/email.js"></script>
 </body>
 </html>
