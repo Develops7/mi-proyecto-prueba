@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Test Interactivo</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f1ed;
+      color: #2e2e2e;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .card {
+      background: white;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      max-width: 600px;
+      text-align: center;
+    }
+    .question {
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+    }
+    .options button {
+      background-color: #8B4513;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      margin: 0.5rem;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    .options button:hover {
+      background-color: #A0522D;
+    }
+    #nextBtn, #finishBtn {
+      margin-top: 2rem;
+      background-color: #006400;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div id="testContainer">
+      <div id="question" class="question">Cargando pregunta...</div>
+      <div id="options" class="options"></div>
+      <button id="nextBtn" onclick="nextQuestion()">Siguiente</button>
+      <button id="finishBtn" onclick="finishTest()" style="display:none;">Finalizar Test</button>
+    </div>
+  </div>
+
+  <script>
+    const questions = [
+      { q: "¿Qué tan seguido reflexionas sobre tus decisiones?", options: ["Nunca", "A veces", "Frecuentemente", "Siempre"] },
+      { q: "¿Te resulta fácil comunicar lo que sientes?", options: ["No", "Poco", "Algo", "Sí, mucho"] },
+      { q: "¿Sientes que tus acciones aportan al bienestar de otros?", options: ["Nunca", "Rara vez", "A menudo", "Siempre"] }
+    ];
+
+    let currentQuestion = 0;
+
+    function renderQuestion() {
+      const questionEl = document.getElementById('question');
+      const optionsEl = document.getElementById('options');
+      const nextBtn = document.getElementById('nextBtn');
+      const finishBtn = document.getElementById('finishBtn');
+
+      questionEl.textContent = questions[currentQuestion].q;
+      optionsEl.innerHTML = '';
+
+      questions[currentQuestion].options.forEach((opt, idx) => {
+        const btn = document.createElement('button');
+        btn.textContent = opt;
+        btn.onclick = () => selectOption(idx);
+        optionsEl.appendChild(btn);
+      });
+
+      nextBtn.style.display = (currentQuestion < questions.length - 1) ? 'inline-block' : 'none';
+      finishBtn.style.display = (currentQuestion === questions.length - 1) ? 'inline-block' : 'none';
+    }
+
+    function selectOption(index) {
+      console.log("Respuesta seleccionada:", questions[currentQuestion].options[index]);
+      // Aquí se puede guardar la respuesta en un arreglo
+    }
+
+    function nextQuestion() {
+      if (currentQuestion < questions.length - 1) {
+        currentQuestion++;
+        renderQuestion();
+      }
+    }
+
+    function finishTest() {
+      window.location.href = "final.html"; // Aquí va la pantalla final con botón de PDF y correo
+    }
+
+    renderQuestion();
+  </script>
+</body>
+</html>
